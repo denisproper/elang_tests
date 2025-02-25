@@ -39,6 +39,14 @@ class SettingsPage(BasePage):
         time.sleep(1)
         select.select_by_visible_text(text)
         time.sleep(1)
+
+    def select_language_of_interface_button(self, text: str = "English"):
+        select_element = self.browser.find_element(*SettingsLocatots.INTERFACE_LANGUAGE_BUTTON)
+        self.scroll_to_element(*SettingsLocatots.INTERFACE_LANGUAGE_BUTTON)
+        select = Select(select_element)
+        time.sleep(1)
+        select.select_by_visible_text(text)
+        time.sleep(1)
         
 
     def fill_username_input(self, text):
@@ -58,9 +66,18 @@ class SettingsPage(BasePage):
         select = Select(select_element)
         return select.first_selected_option.text
     
-    def get_selected_option_for_i_learn_button(self):
+    def get_selected_option_for_translate_into_button(self):
         select_element = self.browser.find_element(*SettingsLocatots.TRANSLATE_INTO_SELECT_BUTTON)
         select = Select(select_element)
         return select.first_selected_option.text
     
- 
+
+    def get_selected_option_for_interface_language_button(self):
+        select_element = self.browser.find_element(*SettingsLocatots.INTERFACE_LANGUAGE_BUTTON)
+        select = Select(select_element)
+        return select.first_selected_option.text
+    
+    def get_text_of_sign_out_button(self):
+        self.scroll_to_element(*SettingsLocatots.SIGN_OUT_BUTTON)
+        time.sleep(1)
+        return self.get_text_from_input(*SettingsLocatots.SIGN_OUT_BUTTON)

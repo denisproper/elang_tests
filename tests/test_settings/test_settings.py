@@ -83,4 +83,20 @@ def test_translate_into_button(browser, input):
     page = page_build(browser)
     page.fill_email_and_password_fields(valid_email, valid_password)
     page.select_language_of_translate_into_button(input)
-    assert page.get_selected_option_for_i_learn_button() == input, "Языки не совпадают"
+    assert page.get_selected_option_for_translate_into_button() == input, "Языки не совпадают"
+
+
+@pytest.mark.parametrize("input", [
+    "Russian", 
+    "English",
+    "German", 
+])
+def test_interface_language_button(browser, input):
+    page = page_build(browser)
+    page.fill_email_and_password_fields(valid_email, valid_password)
+    page.select_language_of_interface_button(input)
+    if input == "Russian":
+        assert page.get_selected_option_for_interface_language_button() == "Русский", "Языки не совпадают"
+        assert page.get_text_of_sign_out_button() == "Выйти из аккаунта" 
+    else: assert page.get_selected_option_for_interface_language_button() == input, "Языки не совпадают"
+        
