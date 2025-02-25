@@ -18,6 +18,7 @@ class BasePage():
             return False
         return True
     
+
     def click(self, how, what):
         try:
             self.browser.find_element(how, what).click()
@@ -39,3 +40,8 @@ class BasePage():
         password_field.clear()
         password_field.send_keys(password)
         self.browser.find_element(*AuthorizationLocators.LOGIN_BUTTON).click()
+
+
+    def scroll_to_element(self, how, what):
+        element = self.browser.find_element(how, what)
+        self.browser.execute_script("arguments[0].scrollIntoView();", element)
