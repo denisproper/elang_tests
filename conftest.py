@@ -1,5 +1,6 @@
 import pytest
 from selenium import webdriver
+from tests.test_authorization.check_functions import check_valid_authorization_build
 
 @pytest.fixture(scope="function")
 def browser():

@@ -3,18 +3,9 @@ from selenium.webdriver.common.by import By
 from .locators import *
 
 class LoginPage(BasePage): 
-    def fill_email_and_password_fields(self, email, password):
-        email_field = self.browser.find_element(*AuthorizationLocators.EMAIL_INPUT)
-        email_field.clear()
-        email_field.send_keys(email)
-
-        password_field = self.browser.find_element(*AuthorizationLocators.PASSWORD_INPUT)
-        password_field.clear()
-        password_field.send_keys(password)
-
     def check_valid_email_and_password_login(self):
         self.browser.find_element(*AuthorizationLocators.LOGIN_BUTTON).click()
-        return self.is_element_present(*SettingsLocatots.AccountSettingsText)
+        return self.is_element_present(*SettingsLocatots.ACCOUNT_SETTINGS_TEXT)
     
 
     def check_wrong_password_login(self):
