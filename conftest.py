@@ -6,6 +6,7 @@ from tests.test_authorization.check_functions import check_valid_authorization_b
 def browser():
     print("\nstart browser for test..")
     browser = webdriver.Chrome()
+    browser.maximize_window()
     yield browser
     print("\nquit browser..")
     browser.quit()
