@@ -1,4 +1,6 @@
 import time
+
+import allure
 import pytest
 
 from tests.test_authorization.check_functions import check_valid_authorization_build
@@ -11,13 +13,16 @@ def page_build(browser):
     page.open()                      
     return page
 
-
+@allure.feature("Проверка корректного функционирования настроек")
+@allure.story("Проверка отображения кнопки выхода из аккаунта")
 def test_is_sign_out_button_present(browser):
     page = page_build(browser)
     page.fill_email_and_password_fields(valid_email, valid_password)
     page.check_sign_out_button()
 
 
+@allure.feature("Проверка корректного функционирования настроек")
+@allure.story("Проверка смены имени пользователя")
 @pytest.mark.parametrize("input", [
     "12345678", 
     "denis",
@@ -38,6 +43,8 @@ def test_change_username(browser, input):
         assert page.get_current_username() == input, "введенные имена не равны"
 
 
+@allure.feature("Проверка корректного функционирования настроек")
+@allure.story("Проверка отображения сообщения о вводе пустого юзернейма")
 def test_required_field_warning(browser):
     page = page_build(browser)
     page.fill_email_and_password_fields(valid_email, valid_password)
@@ -47,6 +54,9 @@ def test_required_field_warning(browser):
     page.check_required_field()
 
 
+
+@allure.feature("Проверка корректного функционирования настроек")
+@allure.story("Проверка приватной политики")
 def test_privacy_policy(browser):
     page = page_build(browser)
     page.fill_email_and_password_fields(valid_email, valid_password)
@@ -62,6 +72,8 @@ def test_privacy_policy(browser):
     assert browser.current_url == link_for_privacy_policy
 
 
+@allure.feature("Проверка корректного функционирования настроек")
+@allure.story("Проверка выбора языков изучения")
 @pytest.mark.parametrize("input", [
     "Bulgarian", 
     "English",
@@ -74,6 +86,8 @@ def test_select_i_learn_button(browser, input):
     assert page.get_selected_option_for_i_learn_button() == input, "Языки не совпадают"
 
 
+@allure.feature("Проверка корректного функционирования настроек")
+@allure.story("Проверка выбора родных языков")
 @pytest.mark.parametrize("input", [
     "Serbian", 
     "Afrikaans",
@@ -86,6 +100,8 @@ def test_translate_into_button(browser, input):
     assert page.get_selected_option_for_translate_into_button() == input, "Языки не совпадают"
 
 
+@allure.feature("Проверка корректного функционирования настроек")
+@allure.story("Проверка выбора языков интерфейса")
 @pytest.mark.parametrize("input", [
     "Russian", 
     "English",

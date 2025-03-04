@@ -9,14 +9,14 @@ class AuthorizationLocators():
     EMAIL_INPUT = (By.XPATH, "//input[@name='email']")
     PASSWORD_INPUT = (By.XPATH, "//input[@name='password']")
 
-    WRONG_PASSWROD = (By.CSS_SELECTOR,'.ml-2.text-xs.text-red-300')
+    WRONG_PASSWORD = (By.CSS_SELECTOR, '.ml-2.text-xs.text-red-300')
     SHORT_PASSWORD = (By.XPATH, "//div[contains(text(), 'Password must be at least 6 characters long')]")
     INVALID_EMAIL = (By.XPATH, "//div[contains(text(), 'Check that you entered your email correctly')]")
     UNAVAILABLE_ACCOUNT = (By.CSS_SELECTOR, "div.ml-2.text-xs.text-red-300")
 
     LOGIN_BUTTON = (By.XPATH, "//button[span[text()='Log in']]")
 
-class SettingsLocatots():
+class SettingsLocators():
     ACCOUNT_SETTINGS_TEXT = (By.XPATH, "//div[text()='Account settings']")
     SIGN_OUT_BUTTON = (By.XPATH, "//button[contains(@class, 'bg-[#FB5353]')]")
     CHANGE_USERNAME_BUTTON = (By.XPATH, "//span[normalize-space(text())='Change username']")

@@ -5,12 +5,12 @@ from .locators import *
 class LoginPage(BasePage): 
     def check_valid_email_and_password_login(self):
         self.browser.find_element(*AuthorizationLocators.LOGIN_BUTTON).click()
-        return self.is_element_present(*SettingsLocatots.ACCOUNT_SETTINGS_TEXT)
+        return self.is_element_present(*SettingsLocators.ACCOUNT_SETTINGS_TEXT)
     
 
     def check_wrong_password_login(self):
         self.browser.find_element(*AuthorizationLocators.LOGIN_BUTTON).click()
-        return self.is_element_present(*AuthorizationLocators.WRONG_PASSWROD)
+        return self.is_element_present(*AuthorizationLocators.WRONG_PASSWORD)
     
     
     def check_short_password_login(self):

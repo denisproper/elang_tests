@@ -1,6 +1,5 @@
 from pages.login_page import LoginPage
 
-#git test
 
 def page_build(browser, link, email, password):
     page = LoginPage(browser, link)  
