@@ -1,6 +1,7 @@
 {
     "link": "https://elang-app-dev-zehqx.ondigitalocean.app/signin",
     "link_for_settings": "https://elang-app-dev-zehqx.ondigitalocean.app/account/settings",
+    "link_for_vocabulary": "https://elang-app-dev-zehqx.ondigitalocean.app/account/vocabulary/words",
     "link_for_privacy_policy": "https://elang-app-dev-zehqx.ondigitalocean.app/privacy",
     "valid_email": "denisproper3859@gmail.com",
     "empty_email": "",

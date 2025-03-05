@@ -31,5 +31,17 @@ class SettingsLocators():
     TRANSLATE_INTO_SELECT_BUTTON = (By.XPATH, "(//select)[2]")
     INTERFACE_LANGUAGE_BUTTON = (By.XPATH, "(//select)[3]")
 
+class VocabularyLocators():
+    VOCABULARY_TITLE = (By.XPATH, "//div[text()='Vocabulary']")
+    VOCABULARY_SECTION = (By.XPATH, "//div[text()='Vocabulary']")
+    PHRASES_SECTION = (By.XPATH, "//div[text()='Phrases']")
+    SETS_SECTION = (By.XPATH, "//div[text()='Sets']")
+    WORDS_SECTION = (By.XPATH, "//div[text()='Words']")
+
+    SEARCH_FIELD = (By.ID, "search-input")
+    WORDS = (By.XPATH, "//div[contains(@class, 'font-bold text-purple-20')]")
+    SORT_ELEMENT = (By.CSS_SELECTOR, "label.ml-4")
+    A_TO_Z_SORT = (By.XPATH, "//li[text()='A to Z']")
+    Z_TO_A_SORT = (By.XPATH, "//li[text()='Z to A']")
 
 
