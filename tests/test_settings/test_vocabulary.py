@@ -29,8 +29,8 @@ def test_sections(browser):
 
 
 @allure.feature("Тест Vocabulary section")
-@allure.story("Проверка поиска поля ввода")
-def test_search_field(browser):
+@allure.story("Проверка поиска поля ввода для слов")
+def test_search_field_for_words(browser):
     page = VocabularyPage(browser, link_for_vocabulary)
     page.open()
     page.fill_email_and_password_fields(valid_email, valid_password)
@@ -57,3 +57,18 @@ def test_sort(browser):
     page.choose_sort("Z to A")
     words_descending = page.get_words()
     assert page.is_sorted_words(words_descending, reverse=True)
+
+
+@allure.feature("Тест Vocabulary section")
+@allure.story("Проверка поиска поля ввода для фраз")
+def test_search_field_for_phrases(browser):
+    page = VocabularyPage(browser, link_for_vocabulary)
+    page.open()
+    page.fill_email_and_password_fields(valid_email, valid_password)
+    page.go_to_vocabulary_section()
+    page.go_to_phrases_section()
+    phrases = page.get_phrases()
+    print(phrases)
+
+
+

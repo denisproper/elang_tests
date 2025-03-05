@@ -44,4 +44,7 @@ class VocabularyLocators():
     A_TO_Z_SORT = (By.XPATH, "//li[text()='A to Z']")
     Z_TO_A_SORT = (By.XPATH, "//li[text()='Z to A']")
 
+    PHRASES = (By.XPATH, "//div[contains(@class, 'font-bold text-purple-20')]")
+
+
 

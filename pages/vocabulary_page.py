@@ -14,6 +14,9 @@ class VocabularyPage(BasePage):
     def go_to_vocabulary_section(self):
         self.click(*VocabularyLocators.VOCABULARY_SECTION)
 
+    def go_to_phrases_section(self):
+        self.click(*VocabularyLocators.PHRASES_SECTION)
+
     def check_title(self):
         return self.is_element_present(*VocabularyLocators.VOCABULARY_TITLE)
 
@@ -44,6 +47,23 @@ class VocabularyPage(BasePage):
             print(f"Ошибка при получении слов: {e}")
             return []
 
+
+    def get_phrases(self):
+        try:
+            elements = WebDriverWait(self.browser, 10).until(
+                EC.presence_of_all_elements_located(VocabularyLocators.PHRASES)
+            )
+            bold_texts = [el.text.strip() for el in elements]
+            return bold_texts
+        except StaleElementReferenceException:
+            elements = self.browser.find_elements(*VocabularyLocators.PHRASES)
+            bold_texts = [el.text.strip() for el in elements]
+            return bold_texts
+        except Exception as e:
+            print(f"Ошибка при получении bold текста: {e}")
+            return []
+
+
     def clear_search_field(self):
         self.browser.find_element(*VocabularyLocators.SEARCH_FIELD).clear()
 
@@ -63,3 +83,5 @@ class VocabularyPage(BasePage):
         if words == sorted_words:
             return True
         return False
+
+
