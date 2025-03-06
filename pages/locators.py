@@ -8,12 +8,10 @@ class MainPageLocators():
 class AuthorizationLocators():
     EMAIL_INPUT = (By.XPATH, "//input[@name='email']")
     PASSWORD_INPUT = (By.XPATH, "//input[@name='password']")
-
     WRONG_PASSWORD = (By.CSS_SELECTOR, '.ml-2.text-xs.text-red-300')
     SHORT_PASSWORD = (By.XPATH, "//div[contains(text(), 'Password must be at least 6 characters long')]")
     INVALID_EMAIL = (By.XPATH, "//div[contains(text(), 'Check that you entered your email correctly')]")
     UNAVAILABLE_ACCOUNT = (By.CSS_SELECTOR, "div.ml-2.text-xs.text-red-300")
-
     LOGIN_BUTTON = (By.XPATH, "//button[span[text()='Log in']]")
 
 class SettingsLocators():
@@ -37,14 +35,18 @@ class VocabularyLocators():
     PHRASES_SECTION = (By.XPATH, "//div[text()='Phrases']")
     SETS_SECTION = (By.XPATH, "//div[text()='Sets']")
     WORDS_SECTION = (By.XPATH, "//div[text()='Words']")
-
     SEARCH_FIELD = (By.ID, "search-input")
     WORDS = (By.XPATH, "//div[contains(@class, 'font-bold text-purple-20')]")
     SORT_ELEMENT = (By.CSS_SELECTOR, "label.ml-4")
     A_TO_Z_SORT = (By.XPATH, "//li[text()='A to Z']")
     Z_TO_A_SORT = (By.XPATH, "//li[text()='Z to A']")
-
     PHRASES = (By.XPATH, "//div[contains(@class, 'font-bold text-purple-20')]")
+    CHECKBOXES = (By.CSS_SELECTOR, '.form-checkbox')
+    SETTINGS_OF_SELECTED_WORDS = (By.CSS_SELECTOR, "img.cursor-pointer[alt='dots']")
+    DELETE_SELECTED_WORDS_BUTTON = (By.XPATH, "//div[contains(@class, 'cursor-pointer') and contains(., 'Delete')]")
+    CONFIRM_DELETE_BUTTON_FOR_WORDS = (By.XPATH, "//button[span[text()='Delete words']]")
+    CONFIRM_DELETE_BUTTON_FOR_PHRASES = (By.XPATH, "//button[span[text()='Delete phrases']]")
+
 
 
 

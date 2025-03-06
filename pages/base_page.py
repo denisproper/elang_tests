@@ -1,5 +1,9 @@
+import time
+
 import allure
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 from pages.locators import AuthorizationLocators
 
@@ -55,6 +59,11 @@ class BasePage():
                 self.browser.find_element(*AuthorizationLocators.LOGIN_BUTTON).click()
 
 
-    def scroll_to_element(self, how, what):
-        element = self.browser.find_element(how, what)
+    def scroll_to_element(self, element):
         self.browser.execute_script("arguments[0].scrollIntoView();", element)
+
+
+    def scroll_and_click(self, element):
+        self.browser.execute_script("arguments[0].scrollIntoView(true);", element)
+        time.sleep(0.5)
+        element.click()

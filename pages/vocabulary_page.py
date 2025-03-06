@@ -1,4 +1,7 @@
+import time
+
 from selenium.common import StaleElementReferenceException
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
@@ -84,4 +87,23 @@ class VocabularyPage(BasePage):
             return True
         return False
 
+    def get_checkboxes(self):
+        checkboxes = WebDriverWait(self.browser, 10).until(
+            EC.visibility_of_all_elements_located(VocabularyLocators.CHECKBOXES)
+        )
+        return checkboxes
 
+    def scroll_and_click_settings_od_selected_words(self):
+        element = self.browser.find_element(*VocabularyLocators.SETTINGS_OF_SELECTED_WORDS)
+        self.scroll_to_element(element)
+        time.sleep(1)
+        self.click(*VocabularyLocators.SETTINGS_OF_SELECTED_WORDS)
+
+    def click_delete_button_for_selected_words(self):
+        self.click(*VocabularyLocators.DELETE_SELECTED_WORDS_BUTTON)
+
+    def click_confirm_delete_button_for_words(self):
+        self.click(*VocabularyLocators.CONFIRM_DELETE_BUTTON_FOR_WORDS)
+
+    def click_confirm_delete_button_for_phrases(self):
+        self.click(*VocabularyLocators.CONFIRM_DELETE_BUTTON_FOR_PHRASES)
