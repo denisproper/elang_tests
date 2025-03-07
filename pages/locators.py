@@ -12,7 +12,7 @@ class AuthorizationLocators():
     SHORT_PASSWORD = (By.XPATH, "//div[contains(text(), 'Password must be at least 6 characters long')]")
     INVALID_EMAIL = (By.XPATH, "//div[contains(text(), 'Check that you entered your email correctly')]")
     UNAVAILABLE_ACCOUNT = (By.CSS_SELECTOR, "div.ml-2.text-xs.text-red-300")
-    LOGIN_BUTTON = (By.XPATH, "//button[span[text()='Log in']]")
+    LOGIN_BUTTON = (By.XPATH, "//button[@type='submit']")
 
 class SettingsLocators():
     ACCOUNT_SETTINGS_TEXT = (By.XPATH, "//div[text()='Account settings']")

@@ -1,7 +1,9 @@
 import time
 
 import allure
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 from pages.locators import AuthorizationLocators
 
@@ -28,8 +30,11 @@ class BasePage():
     with allure.step("Клик на элемент"):
         def click(self, how, what):
             try:
-                self.browser.find_element(how, what).click()
-            except (NoSuchElementException):
+                element = WebDriverWait(self.browser, 10).until(
+                    EC.element_to_be_clickable((how, what))
+                )
+                element.click()
+            except (NoSuchElementException, TimeoutException):
                 return False
 
 
@@ -58,10 +63,16 @@ class BasePage():
 
 
     def scroll_to_element(self, element):
-        self.browser.execute_script("arguments[0].scrollIntoView();", element)
+        if element is not None:
+            self.browser.execute_script("arguments[0].scrollIntoView();", element)
+        else:
+            raise ValueError("Element is None")
 
 
     def scroll_and_click(self, element):
-        self.browser.execute_script("arguments[0].scrollIntoView(true);", element)
-        time.sleep(0.5)
-        element.click()
+        if element is not None:
+            self.browser.execute_script("arguments[0].scrollIntoView(true);", element)
+            time.sleep(0.5)
+            element.click()
+        else:
+            raise ValueError("Element is None")

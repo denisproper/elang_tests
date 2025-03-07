@@ -34,7 +34,7 @@ class SettingsPage(BasePage):
 
     def select_language_of_i_learn_button(self, text: str = "English"):
         select_element = self.browser.find_element(*SettingsLocators.I_LEARN_SELECT_BUTTON)
-        self.scroll_to_element(*SettingsLocators.I_LEARN_SELECT_BUTTON)
+        self.scroll_to_element(select_element)
         select = Select(select_element)
         time.sleep(1)
         select.select_by_visible_text(text)
@@ -42,7 +42,7 @@ class SettingsPage(BasePage):
 
     def select_language_of_translate_into_button(self, text: str = "English"):
         select_element = self.browser.find_element(*SettingsLocators.TRANSLATE_INTO_SELECT_BUTTON)
-        self.scroll_to_element(*SettingsLocators.TRANSLATE_INTO_SELECT_BUTTON)
+        self.scroll_to_element(select_element)
         select = Select(select_element)
         time.sleep(1)
         select.select_by_visible_text(text)
@@ -50,7 +50,7 @@ class SettingsPage(BasePage):
 
     def select_language_of_interface_button(self, text: str = "English"):
         select_element = self.browser.find_element(*SettingsLocators.INTERFACE_LANGUAGE_BUTTON)
-        self.scroll_to_element(*SettingsLocators.INTERFACE_LANGUAGE_BUTTON)
+        self.scroll_to_element(select_element)
         select = Select(select_element)
         time.sleep(1)
         select.select_by_visible_text(text)
@@ -86,6 +86,7 @@ class SettingsPage(BasePage):
         return select.first_selected_option.text
 
     def get_text_of_sign_out_button(self):
-        self.scroll_to_element(*SettingsLocators.SIGN_OUT_BUTTON)
+        element = self.browser.find_element(*SettingsLocators.SIGN_OUT_BUTTON)
+        self.scroll_to_element(element)
         time.sleep(1)
         return self.get_text_from_input(*SettingsLocators.SIGN_OUT_BUTTON)

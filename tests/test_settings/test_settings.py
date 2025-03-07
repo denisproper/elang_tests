@@ -40,6 +40,7 @@ def test_change_username(browser, input):
     if input == " ":
         assert page.get_current_username() == "", "введенные имена не равны"
     else:
+        print(page.get_current_username(), input)
         assert page.get_current_username() == input, "введенные имена не равны"
 
 
