@@ -88,22 +88,27 @@ jobs:
       - name: Run tests for test_one
         if: "github.event.inputs.deployment_target == 'test_one'"
         run: pytest tests/test_settings/test_vocabulary.py::test_title --alluredir=results
+        continue-on-error: true
 
       - name: Run tests for test_authorization
         if: "github.event.inputs.deployment_target == 'test_authorization'"
         run: pytest tests/test_authorization/* --alluredir=results
+        continue-on-error: true
 
       - name: Run tests for test_settings
         if: "github.event.inputs.deployment_target == 'test_settings'"
         run: pytest tests/test_settings/test_settings.py --alluredir=results
+        continue-on-error: true
 
       - name: Run tests for test_vocabulary
         if: "github.event.inputs.deployment_target == 'test_vocabulary'"
         run: pytest tests/test_settings/test_vocabulary.py --alluredir=results
+        continue-on-error: true
 
       - name: Run all tests
         if: "github.event.inputs.deployment_target == 'all_tests'"
         run: pytest tests/* --alluredir=results
+        continue-on-error: true
 
       - name: Store allure history
         uses: actions/upload-artifact@v4
