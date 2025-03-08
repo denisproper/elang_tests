@@ -13,7 +13,6 @@ def browser():
     options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.3")
     print("\nstart browser for test..")
     browser = webdriver.Chrome(options=options)
-    browser.maximize_window()
     yield browser
     print("\nquit browser..")
     time.sleep(20)
