@@ -1,8 +1,5 @@
-import time
 import random
 import allure
-import pytest
-
 from pages.vocabulary_page import VocabularyPage
 from env.json_read import link_for_vocabulary, valid_password, valid_email
 
@@ -130,3 +127,4 @@ def test_select_and_delete_phrases(browser):
 
     phrases_after_delete = page.get_words()
     assert deleted_words not in phrases_after_delete, "Не все фразы удалились"
+
