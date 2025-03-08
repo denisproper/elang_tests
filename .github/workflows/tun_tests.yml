@@ -6,12 +6,13 @@ on:
       deployment_target:
         description: Choose target
         required: true
-        default: test_authorization
+        default: all_tests
         type: choice
         options:
           - test_authorization
           - test_settings
           - test_vocabulary
+          - all_tests
 
 jobs:
   test:
@@ -37,3 +38,6 @@ jobs:
       - name: test_vocabulary
         if: "github.event.inputs.deployment_target == 'test_vocabulary'"
         run: pytest tests/test_settings/test_vocabulary.py
+      - name: test_vocabulary
+        if: "github.event.inputs.deployment_target == 'all_tests'"
+        run: pytest tests/*
