@@ -38,6 +38,6 @@ jobs:
       - name: test_vocabulary
         if: "github.event.inputs.deployment_target == 'test_vocabulary'"
         run: pytest tests/test_settings/test_vocabulary.py
-      - name: test_vocabulary
+      - name: all_tests
         if: "github.event.inputs.deployment_target == 'all_tests'"
         run: pytest tests/*
