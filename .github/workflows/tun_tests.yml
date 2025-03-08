@@ -106,12 +106,11 @@ jobs:
         if: "github.event.inputs.deployment_target == 'all_tests'"
         run: pytest tests/* --alluredir=results
 
-      - name: Store allure results
+      - name: Store allure history
         uses: actions/upload-artifact@v4
         with:
-          name: results
-          path:
-            results
+          name: results-${{ github.run_id }}
+          path: results
           retention-days: 1
 
   generate-report:
