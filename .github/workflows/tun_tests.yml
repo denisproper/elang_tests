@@ -27,68 +27,81 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.13"
+
       - name: Install Chrome
-        run: sudo apt-get install google-chrome-stable
+        run: sudo apt-get install -y google-chrome-stable
+
       - name: Install dependencies
         run: pip install -r requirements.txt
-      - name: test_one
+
+      - name: Run tests for test_one
         if: "github.event.inputs.deployment_target == 'test_one'"
         run: pytest tests/test_settings/test_vocabulary.py::test_title --alluredir=results
-      - name: test_authorization
+
+      - name: Run tests for test_authorization
         if: "github.event.inputs.deployment_target == 'test_authorization'"
         run: pytest tests/test_authorization/* --alluredir=results
-      - name: test_settings
+
+      - name: Run tests for test_settings
         if: "github.event.inputs.deployment_target == 'test_settings'"
         run: pytest tests/test_settings/test_settings.py --alluredir=results
-      - name: test_vocabulary
+
+      - name: Run tests for test_vocabulary
         if: "github.event.inputs.deployment_target == 'test_vocabulary'"
         run: pytest tests/test_settings/test_vocabulary.py --alluredir=results
-      - name: all_tests
+
+      - name: Run all tests
         if: "github.event.inputs.deployment_target == 'all_tests'"
         run: pytest tests/* --alluredir=results
+
       - name: Store allure results
         uses: actions/upload-artifact@v4
         with:
           name: results
-          path:
-            results
+          path: results
           retention-days: 1
-
 
   generate-report:
     runs-on: ubuntu-latest
     needs: test
-    name: Generate report
     steps:
       - uses: actions/setup-java@v3
         with:
           distribution: 'microsoft'
           java-version: '17'
-      - run: sudo wget https://github.com/allure-framework/allure2/releases/download/2.23.1/allure-2.23.1.tgz && sudo tar -zxvf allure-2.23.1.tgz -C /opt/ && sudo ln -s /opt/allure-2.23.1/bin/allure /usr/bin/allure
+
+      - run: |
+          sudo wget https://github.com/allure-framework/allure2/releases/download/2.23.1/allure-2.23.1.tgz
+          sudo tar -zxvf allure-2.23.1.tgz -C /opt/
+          sudo ln -s /opt/allure-2.23.1/bin/allure /usr/bin/allure
+
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v4
+
       - run: allure generate -c results -o _site
+
       - name: Store generated report
         uses: actions/upload-artifact@v4
         with:
           name: _site
-          path:
-            _site
+          path: _site
           retention-days: 1
 
   publish-report:
     runs-on: ubuntu-latest
     needs: generate-report
-    name: Report publication
     steps:
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v4
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v2
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1.2.9
