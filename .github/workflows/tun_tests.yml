@@ -37,7 +37,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: test_one
         if: "github.event.inputs.deployment_target == 'test_one'"
-        run: pytest tests/test_settings/test_vocabulary.py::test_sections --alluredir=results
+        run: pytest tests/test_settings/test_vocabulary.py::test_title --alluredir=results
       - name: test_authorization
         if: "github.event.inputs.deployment_target == 'test_authorization'"
         run: pytest tests/test_authorization/* --alluredir=results
