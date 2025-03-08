@@ -32,9 +32,9 @@ class SettingsLocators():
 class VocabularyLocators():
     VOCABULARY_TITLE = (By.XPATH, "//div[text()='Vocabulary']")
     VOCABULARY_SECTION = (By.XPATH, "//div[text()='Vocabulary']")
-    PHRASES_SECTION = (By.XPATH, "//div[text()='Phrases']")
-    SETS_SECTION = (By.XPATH, "//div[text()='Sets']")
-    WORDS_SECTION = (By.XPATH, "//div[text()='Words']")
+    PHRASES_SECTION = (By.XPATH, '//a[@href="/account/vocabulary/phares"]')
+    SETS_SECTION = (By.XPATH, '//a[@href="/account/vocabulary/sets"]')
+    WORDS_SECTION = (By.XPATH, '//a[@href="/account/vocabulary/words"]')
     SEARCH_FIELD = (By.ID, "search-input")
     WORDS = (By.XPATH, "//div[contains(@class, 'font-bold text-purple-20')]")
     SORT_ELEMENT = (By.CSS_SELECTOR, "label.ml-4")
