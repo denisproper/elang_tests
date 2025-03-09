@@ -1,12 +1,8 @@
-import time
-
-from selenium.common import StaleElementReferenceException
+from selenium.common import StaleElementReferenceException, ElementNotInteractableException
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 
 from pages.base_page import BasePage
 from pages.locators import VocabularyLocators
-
 
 
 class VocabularyPage(BasePage):
@@ -14,95 +10,77 @@ class VocabularyPage(BasePage):
         super().__init__(browser, url)
 
     def go_to_vocabulary_section(self):
-        self.click(*VocabularyLocators.VOCABULARY_SECTION)
+        self.wait.until(EC.element_to_be_clickable(VocabularyLocators.VOCABULARY_SECTION)).click()
 
     def go_to_phrases_section(self):
-        self.click(*VocabularyLocators.PHRASES_SECTION)
+        self.wait.until(EC.element_to_be_clickable(VocabularyLocators.PHRASES_SECTION)).click()
 
     def check_title(self):
-        return self.is_element_present(*VocabularyLocators.VOCABULARY_TITLE)
+        return self.wait.until(EC.presence_of_element_located(VocabularyLocators.VOCABULARY_TITLE))
 
     def check_phrases_section(self):
-        return self.is_element_present(*VocabularyLocators.PHRASES_SECTION)
+        return self.wait.until(EC.presence_of_element_located(VocabularyLocators.PHRASES_SECTION))
 
     def check_sets_section(self):
-        return self.is_element_present(*VocabularyLocators.SETS_SECTION)
+        return self.wait.until(EC.presence_of_element_located(VocabularyLocators.SETS_SECTION))
 
     def check_words_section(self):
-        return self.is_element_present(*VocabularyLocators.WORDS_SECTION)
+        return self.wait.until(EC.presence_of_element_located(VocabularyLocators.WORDS_SECTION))
 
     def input_search_field(self, text):
-        self.browser.find_element(*VocabularyLocators.SEARCH_FIELD).send_keys(text)
+        search_field = self.wait.until(EC.presence_of_element_located(VocabularyLocators.SEARCH_FIELD))
+        search_field.send_keys(text)
 
     def get_words(self):
         try:
-            elements = WebDriverWait(self.browser, 10).until(
-                EC.presence_of_all_elements_located(VocabularyLocators.WORDS)
-            )
-            names = [el.text.strip() for el in elements]
-            return names
+            elements = self.wait.until(EC.presence_of_all_elements_located(VocabularyLocators.WORDS))
+            return [el.text.strip() for el in elements]
         except StaleElementReferenceException:
             elements = self.browser.find_elements(*VocabularyLocators.WORDS)
-            names = [el.text.strip() for el in elements]
-            return names
+            return [el.text.strip() for el in elements]
         except Exception as e:
             print(f"Ошибка при получении слов: {e}")
             return []
 
-
     def get_phrases(self):
         try:
-            elements = WebDriverWait(self.browser, 10).until(
-                EC.presence_of_all_elements_located(VocabularyLocators.PHRASES)
-            )
-            bold_texts = [el.text.strip() for el in elements]
-            return bold_texts
+            elements = self.wait.until(EC.presence_of_all_elements_located(VocabularyLocators.PHRASES))
+            return [el.text.strip() for el in elements]
         except StaleElementReferenceException:
             elements = self.browser.find_elements(*VocabularyLocators.PHRASES)
-            bold_texts = [el.text.strip() for el in elements]
-            return bold_texts
+            return [el.text.strip() for el in elements]
         except Exception as e:
             print(f"Ошибка при получении bold текста: {e}")
             return []
 
-
     def clear_search_field(self):
-        self.browser.find_element(*VocabularyLocators.SEARCH_FIELD).clear()
+        search_field = self.wait.until(EC.presence_of_element_located(VocabularyLocators.SEARCH_FIELD))
+        search_field.clear()
 
-
-    def choose_sort(self, sorting_option = "A to Z"):
-        self.click(*VocabularyLocators.SORT_ELEMENT)
+    def choose_sort(self, sorting_option="A to Z"):
+        self.wait.until(EC.element_to_be_clickable(VocabularyLocators.SORT_ELEMENT)).click()
         if sorting_option == "A to Z":
-            self.click(*VocabularyLocators.A_TO_Z_SORT)
+            self.wait.until(EC.element_to_be_clickable(VocabularyLocators.A_TO_Z_SORT)).click()
         elif sorting_option == "Z to A":
-            self.click(*VocabularyLocators.Z_TO_A_SORT)
+            self.wait.until(EC.element_to_be_clickable(VocabularyLocators.Z_TO_A_SORT)).click()
         else:
             print("Неизвестный вариант сортировки")
 
-
-    def is_sorted_words(self, words: list[str], reverse = False):
-        sorted_words = sorted(words, key=str.lower, reverse=reverse)
-        if words == sorted_words:
-            return True
-        return False
+    def is_sorted_words(self, words: list[str], reverse=False):
+        return words == sorted(words, key=str.lower, reverse=reverse)
 
     def get_checkboxes(self):
-        checkboxes = WebDriverWait(self.browser, 10).until(
-            EC.visibility_of_all_elements_located(VocabularyLocators.CHECKBOXES)
-        )
-        return checkboxes
+        return self.wait.until(EC.visibility_of_all_elements_located(VocabularyLocators.CHECKBOXES))
 
-    def scroll_and_click_settings_od_selected_words(self):
-        element = self.browser.find_element(*VocabularyLocators.SETTINGS_OF_SELECTED_WORDS)
-        self.scroll_to_element(element)
-        time.sleep(1)
-        self.click(*VocabularyLocators.SETTINGS_OF_SELECTED_WORDS)
+    def scroll_and_click_settings_of_selected_words(self):
+        element = self.wait.until(EC.element_to_be_clickable(VocabularyLocators.SETTINGS_OF_SELECTED_WORDS))
+        self.scroll_and_click(element)
 
     def click_delete_button_for_selected_words(self):
-        self.click(*VocabularyLocators.DELETE_SELECTED_WORDS_BUTTON)
+        self.wait.until(EC.element_to_be_clickable(VocabularyLocators.DELETE_SELECTED_WORDS_BUTTON)).click()
 
     def click_confirm_delete_button_for_words(self):
-        self.click(*VocabularyLocators.CONFIRM_DELETE_BUTTON_FOR_WORDS)
+        self.wait.until(EC.element_to_be_clickable(VocabularyLocators.CONFIRM_DELETE_BUTTON_FOR_WORDS)).click()
 
     def click_confirm_delete_button_for_phrases(self):
-        self.click(*VocabularyLocators.CONFIRM_DELETE_BUTTON_FOR_PHRASES)
+        self.wait.until(EC.element_to_be_clickable(VocabularyLocators.CONFIRM_DELETE_BUTTON_FOR_PHRASES)).click()

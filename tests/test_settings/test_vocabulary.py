@@ -84,13 +84,15 @@ def test_select_and_delete_words(browser):
     if total_checkboxes == 0:
         raise ValueError("Нет доступных чекбоксов")
 
-    half_count = total_checkboxes // 2
+    if total_checkboxes == 1: half_count = 1
+    else: half_count = total_checkboxes // 2
+
     deleted_words = words_before_delete[:half_count]
 
     for i in range(half_count):
         page.scroll_and_click(checkboxes[i])
 
-    page.scroll_and_click_settings_od_selected_words()
+    page.scroll_and_click_settings_of_selected_words()
 
     page.click_delete_button_for_selected_words()
     page.click_confirm_delete_button_for_words()
@@ -120,7 +122,7 @@ def test_select_and_delete_phrases(browser):
     for i in range(half_count):
         page.scroll_and_click(checkboxes[i])
 
-    page.scroll_and_click_settings_od_selected_words()
+    page.scroll_and_click_settings_of_selected_words()
 
     page.click_delete_button_for_selected_words()
     page.click_confirm_delete_button_for_phrases()

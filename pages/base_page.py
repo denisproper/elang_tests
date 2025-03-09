@@ -63,13 +63,13 @@ class BasePage():
         login_button.click()
 
 
-    def scroll_to_element(self, how, what):
-        element = self.wait.until(EC.presence_of_element_located((how, what)))
+    def scroll_to_element(self, element):
         self.browser.execute_script("arguments[0].scrollIntoView();", element)
 
 
-    def scroll_and_click(self, how, what):
-        element = self.wait.until(EC.element_to_be_clickable((how, what)))
+    def scroll_and_click(self, element):
         self.browser.execute_script("arguments[0].scrollIntoView(true);", element)
         time.sleep(0.5)
         element.click()
+
+
