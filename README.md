@@ -9,8 +9,6 @@
 
 4. After selecting your desired tests, press the Run workflow button again to initiate the execution.
 
-5. Once the tests have been completed, go to Settings in the repository.
-
-6. Under the Pages section, you will find the link to the generated site where the Allure reports are hosted.
+5. Once the tests have been completed, go to https://denisproper.github.io/elang_tests/ where Allure reports are hosted.
 
 _Note: The test results in Allure may be available for viewing within 10 minutes after the tests have completed._
