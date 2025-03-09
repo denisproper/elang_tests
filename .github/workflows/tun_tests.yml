@@ -67,6 +67,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: download-history
 
+    env:
+      VALID_EMAIL: ${{ secrets.VALID_EMAIL }}
+      VALID_PASSWORD: ${{ secrets.VALID_PASSWORD }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
