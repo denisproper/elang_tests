@@ -1,6 +1,0 @@
-
-start browser for test..
-Ошибка при получении слов: Message: 
-
-
-quit browser..
