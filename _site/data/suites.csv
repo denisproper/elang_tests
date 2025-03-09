@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","5704","test_sections","tests.test_settings","Sun Mar 09 17:15:20 MSK 2025","passed","Sun Mar 09 17:15:25 MSK 2025","","test_vocabulary","",""
+"","16020","test_search_field_for_words","tests.test_settings","Sun Mar 09 17:15:26 MSK 2025","passed","Sun Mar 09 17:15:42 MSK 2025","","test_vocabulary","",""
+"","6202","test_sort","","Sun Mar 09 17:15:42 MSK 2025","passed","Sun Mar 09 17:15:49 MSK 2025","","","",""
+"","6095","test_title","tests.test_settings","Sun Mar 09 17:15:13 MSK 2025","passed","Sun Mar 09 17:15:19 MSK 2025","","test_vocabulary","",""
