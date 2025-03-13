@@ -43,19 +43,19 @@ jobs:
 
       - name: Run tests for test_authorization
         if: "github.event.inputs.deployment_target == 'test_authorization'"
-        run: pytest tests/test_authorization/* --maxfail=5 --disable-warnings
+        run: pytest tests/test_authorization/* --disable-warnings
 
       - name: Run tests for test_settings
         if: "github.event.inputs.deployment_target == 'test_settings'"
-        run: pytest tests/test_settings/test_settings.py --maxfail=5 --disable-warnings
+        run: pytest tests/test_settings/test_settings.py --disable-warnings
 
       - name: Run tests for test_vocabulary
         if: "github.event.inputs.deployment_target == 'test_vocabulary'"
-        run: pytest tests/test_settings/test_vocabulary.py --maxfail=5 --disable-warnings
+        run: pytest tests/test_settings/test_vocabulary.py --disable-warnings
 
       - name: Run all tests
         if: "github.event.inputs.deployment_target == 'all_tests'"
-        run: pytest tests/* --maxfail=5 --disable-warnings
+        run: pytest tests/* --disable-warnings
 
       - name: Store results
         uses: actions/upload-artifact@v4
