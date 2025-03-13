@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  test-service:
+    build: .
+    image: tests-image
+    container_name: test-container
+    volumes:
+      - ./results:/app/results
+    environment:
+      - VALID_EMAIL=${VALID_EMAIL}
+      - VALID_PASSWORD=${VALID_PASSWORD}
+    entrypoint: ["pytest", "tests/${TARGET_TEST}"]
