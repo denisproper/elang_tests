@@ -8,5 +8,5 @@ valid_data = [
     (fake.first_name(), fake.email(), fake.paragraph(nb_sentences=5)),
     (fake.first_name()[:2], fake.email(), fake.sentence()),
     (fake.first_name()[:13], fake.email(), fake.sentence()),
-    (fake.user_name(), fake.email(), fake.sentence()),
+    (fake.user_name(), fake.email(), fake.sentence())
 ]
