@@ -2,8 +2,8 @@ import allure
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
-from .base_page import BasePage
-from .locators import *
+from pages.base_page import BasePage
+from pages.locators import *
 
 class SettingsPage(BasePage):
     def check_sign_out_button(self):

@@ -1,6 +1,6 @@
 import allure
 
-from pages.support_page import SupportPage
+from pages.settings.support_page import SupportPage
 from env.json_read import link_for_vocabulary, valid_password, valid_email
 
 

@@ -1,6 +1,6 @@
-from .base_page import BasePage
+from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
-from .locators import *
+from pages.locators import *
 
 class LoginPage(BasePage): 
     def check_valid_email_and_password_login(self):

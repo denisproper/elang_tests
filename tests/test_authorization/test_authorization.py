@@ -2,7 +2,7 @@ import pytest
 from env.json_read import *
 import allure
 
-from pages.login_page import LoginPage
+from pages.login.login_page import LoginPage
 
 
 def page_build(browser, link, email, password):

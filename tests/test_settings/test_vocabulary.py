@@ -1,6 +1,6 @@
 import random
 import allure
-from pages.vocabulary_page import VocabularyPage
+from pages.settings.vocabulary_page import VocabularyPage
 from env.json_read import link_for_vocabulary, valid_password, valid_email
 
 
