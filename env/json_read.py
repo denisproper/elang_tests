@@ -21,6 +21,7 @@ digits_password = config['digits_password']
 link_for_settings = config["link_for_settings"]
 link_for_privacy_policy = config["link_for_privacy_policy"]
 link_for_vocabulary = config["link_for_vocabulary"]
+link_for_support = config["link_for_support"]
 
 
 load_dotenv()

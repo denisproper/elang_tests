@@ -47,6 +47,10 @@ class VocabularyLocators():
     CONFIRM_DELETE_BUTTON_FOR_WORDS = (By.XPATH, "//button[span[text()='Delete words']]")
     CONFIRM_DELETE_BUTTON_FOR_PHRASES = (By.XPATH, "//button[span[text()='Delete phrases']]")
 
+class SupportLocators():
+    SUPPORT_SECTION = (By.XPATH, "//div[text()='Support']")
+    HELP_TEXT = (By.CSS_SELECTOR, "div.flex-row.active.py-5.last\\:mb-0.px-10.ts\\:px-5.ovS\\:px-5.flex.items-center")
+
 
 
 
