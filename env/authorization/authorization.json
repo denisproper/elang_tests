@@ -1,0 +1,10 @@
+{
+  "empty_email": "",
+  "digits_email": "123456",
+  "digits_email_with_at": "123456@",
+  "digits_email_with_at_com": "123456@gmail.com",
+  "partly_right_email": "denisroper3859@gmail.com",
+  "empty_password": "",
+  "special_symbols_password": "...",
+  "digits_password": "12345678"
+}

@@ -3,9 +3,10 @@ import time
 import allure
 import pytest
 
-from env.json_read import valid_email, valid_password, link_for_privacy_policy
+from env.authorization.json_read import valid_email, valid_password
+from env.config.json_read import link_for_privacy_policy
 from pages.settings.settings_page import SettingsPage
-from env.json_read import link_for_settings
+from env.config.json_read import link_for_settings
 
 def page_build(browser):
     page = SettingsPage(browser, link_for_settings)  

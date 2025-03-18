@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from pages.locators import AuthorizationLocators
 
 class BasePage():
-    def __init__(self, browser, url, timeout=10):
+    def __init__(self, browser, url, timeout=15):
         self.browser = browser
         self.url = url
         self.wait = WebDriverWait(self.browser, timeout, poll_frequency=1)

@@ -1,5 +1,6 @@
 import pytest
-from env.json_read import *
+from env.authorization.json_read import *
+from env.config.json_read import *
 import allure
 
 from pages.login.login_page import LoginPage

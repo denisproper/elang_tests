@@ -1,7 +1,8 @@
 import random
 import allure
 from pages.settings.vocabulary_page import VocabularyPage
-from env.json_read import link_for_vocabulary, valid_password, valid_email
+from env.authorization.json_read import  valid_password, valid_email
+from env.config.json_read import link_for_vocabulary
 
 
 @allure.feature("Тест Vocabulary section")

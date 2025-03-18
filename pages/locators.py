@@ -50,6 +50,12 @@ class VocabularyLocators():
 class SupportLocators():
     SUPPORT_SECTION = (By.XPATH, "//div[text()='Support']")
     HELP_TEXT = (By.CSS_SELECTOR, "div.flex-row.active.py-5.last\\:mb-0.px-10.ts\\:px-5.ovS\\:px-5.flex.items-center")
+    NAME_INPUT = (By.XPATH, "(//input[@type='text'])[1]")
+    EMAIL_INPUT = (By.XPATH, "(//input[@type='text'])[2]")
+    MESSAGE_INPUT = (By.XPATH, "//textarea[@name='text']")
+    SUCCESSFUL_MESSAGE = (By.XPATH, "//div[@role='dialog']")
+    SEND_MESSAGE_BUTTON = (By.XPATH, "//button[@type='submit']")
+
 
 
 
