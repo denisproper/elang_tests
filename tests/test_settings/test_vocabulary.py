@@ -1,133 +1,117 @@
 import random
 import allure
+import pytest
 from pages.settings.vocabulary_page import VocabularyPage
-from env.authorization.json_read import  valid_password, valid_email
+from env.authorization.json_read import valid_password, valid_email
 from env.config.json_read import link_for_vocabulary
 
 
-@allure.feature("Тест Vocabulary section")
-@allure.story("Проверка названия")
-def test_title(browser):
-    page = VocabularyPage(browser, link_for_vocabulary)
-    page.open()
-    page.fill_email_and_password_fields(valid_email, valid_password)
-    page.go_to_vocabulary_section()
-    assert page.check_title()
+@allure.feature("Test Vocabulary section")
+class TestVocabularySection:
+    """Test suite for Vocabulary section functionality"""
+
+    @pytest.fixture(autouse=True)
+    def setup(self, browser):
+        """Common setup for all tests: initialize page, login, and navigate to vocabulary section"""
+        self.page = VocabularyPage(browser, link_for_vocabulary)
+        self.page.open()
+        self.page.fill_email_and_password_fields(valid_email, valid_password)
+        self.page.go_to_vocabulary_section()
 
 
-@allure.feature("Тест Vocabulary section")
-@allure.story("Проверка разделов словаря")
-def test_sections(browser):
-    page = VocabularyPage(browser, link_for_vocabulary)
-    page.open()
-    page.fill_email_and_password_fields(valid_email, valid_password)
-    page.go_to_vocabulary_section()
-    assert page.check_words_section()
-    assert page.check_phrases_section()
-    assert page.check_sets_section()
+    @allure.story("Check layout")
+    def test_title(self):
+        """Verify vocabulary section title is displayed correctly"""
+        assert self.page.check_title(), "Vocabulary section title is not displayed correctly"
 
 
-@allure.feature("Тест Vocabulary section")
-@allure.story("Проверка поиска поля ввода для слов")
-def test_search_field_for_words(browser):
-    page = VocabularyPage(browser, link_for_vocabulary)
-    page.open()
-    page.fill_email_and_password_fields(valid_email, valid_password)
-    page.go_to_vocabulary_section()
-    words = page.get_words()
-    half_count = len(words) // 2
-    random_words = random.sample(words, half_count)
-    for word in random_words:
-        page.input_search_field(word)
-        assert word in page.get_words(), f"Слово '{word}' не отображается в результатах поиска"
-        page.clear_search_field()
+    @allure.story("Check vocabulary sections")
+    def test_sections(self):
+        """Verify all vocabulary sections (words, phrases, sets) are displayed"""
+        assert self.page.check_words_section(), "Words section is not displayed"
+        assert self.page.check_phrases_section(), "Phrases section is not displayed"
+        assert self.page.check_sets_section(), "Sets section is not displayed"
 
 
-@allure.feature("Тест Vocabulary section")
-@allure.story("Проверка сортировки поля ввода")
-def test_sort(browser):
-    page = VocabularyPage(browser, link_for_vocabulary)
-    page.open()
-    page.fill_email_and_password_fields(valid_email, valid_password)
-    page.go_to_vocabulary_section()
-    page.choose_sort("A to Z")
-    words_ascending = page.get_words()
-    assert page.is_sorted_words(words_ascending)
-
-    page.choose_sort("Z to A")
-    words_descending = page.get_words()
-    assert page.is_sorted_words(words_descending, reverse=True)
+    @allure.story("Check search field for words")
+    def test_search_field_for_words(self):
+        """Verify search functionality for words"""
+        words = self.page.get_words()
+        half_count = len(words) // 2
+        random_words = random.sample(words, half_count)
+        for word in random_words:
+            self.page.input_search_field(word)
+            assert word in self.page.get_words(), f"Word '{word}' is not displayed in search results"
+            self.page.clear_search_field()
 
 
-@allure.feature("Тест Vocabulary section")
-@allure.story("Проверка поиска поля ввода для фраз")
-def test_search_field_for_phrases(browser):
-    page = VocabularyPage(browser, link_for_vocabulary)
-    page.open()
-    page.fill_email_and_password_fields(valid_email, valid_password)
-    page.go_to_vocabulary_section()
-    page.go_to_phrases_section()
-    phrases = page.get_phrases()
-    print(phrases)
+    @allure.story("Check sorting functionality")
+    def test_sort(self):
+        """Verify sorting of words in ascending and descending order"""
+        self.page.choose_sort("A to Z")
+        words_ascending = self.page.get_words()
+        assert self.page.is_sorted_words(words_ascending), "Words are not sorted from A to Z"
+
+        self.page.choose_sort("Z to A")
+        words_descending = self.page.get_words()
+        assert self.page.is_sorted_words(words_descending, reverse=True), "Words are not sorted from Z to A"
 
 
-@allure.feature("Тест Vocabulary section")
-@allure.story("Проверка удаления нескольких слов")
-def test_select_and_delete_words(browser):
-    page = VocabularyPage(browser, link_for_vocabulary)
-    page.open()
-    page.fill_email_and_password_fields(valid_email, valid_password)
-    page.go_to_vocabulary_section()
-    words_before_delete = page.get_words()
-    checkboxes = page.get_checkboxes()
-    total_checkboxes = len(checkboxes)
-
-    if total_checkboxes == 0:
-        raise ValueError("Нет доступных чекбоксов")
-
-    if total_checkboxes == 1: half_count = 1
-    else: half_count = total_checkboxes // 2
-
-    deleted_words = words_before_delete[:half_count]
-
-    for i in range(half_count):
-        page.scroll_and_click(checkboxes[i])
-
-    page.scroll_and_click_settings_of_selected_words()
-
-    page.click_delete_button_for_selected_words()
-    page.click_confirm_delete_button_for_words()
-
-    words_after_delete = page.get_words()
-    assert deleted_words not in words_after_delete, "Не все слова удалились"
+    @allure.story("Check search field for phrases")
+    def test_search_field_for_phrases(self):
+        """Verify search field visibility and functionality for phrases"""
+        self.page.go_to_phrases_section()
+        phrases = self.page.get_phrases()
+        assert phrases, "No phrases found in phrases section"
 
 
-@allure.feature("Тест Vocabulary section")
-@allure.story("Проверка удаления нескольких фраз")
-def test_select_and_delete_phrases(browser):
-    page = VocabularyPage(browser, link_for_vocabulary)
-    page.open()
-    page.fill_email_and_password_fields(valid_email, valid_password)
-    page.go_to_vocabulary_section()
-    page.go_to_phrases_section()
-    phrases_before_delete = page.get_phrases()
-    checkboxes = page.get_checkboxes()
-    total_checkboxes = len(checkboxes)
+    @allure.story("Check deletion of multiple words")
+    def test_select_and_delete_words(self):
+        """Verify deletion of multiple selected words"""
+        words_before_delete = self.page.get_words()
+        checkboxes = self.page.get_checkboxes()
+        total_checkboxes = len(checkboxes)
 
-    if total_checkboxes == 0:
-        raise ValueError("Нет доступных чекбоксов")
+        if total_checkboxes == 0:
+            raise ValueError("No available checkboxes to select")
 
-    half_count = total_checkboxes // 2
-    deleted_words = phrases_before_delete[:half_count]
+        half_count = 1 if total_checkboxes == 1 else total_checkboxes // 2
+        deleted_words = words_before_delete[:half_count]
 
-    for i in range(half_count):
-        page.scroll_and_click(checkboxes[i])
+        for i in range(half_count):
+            self.page.scroll_and_click(checkboxes[i])
 
-    page.scroll_and_click_settings_of_selected_words()
+        self.page.scroll_and_click_settings_of_selected_words()
+        self.page.click_delete_button_for_selected_words()
+        self.page.click_confirm_delete_button_for_words()
 
-    page.click_delete_button_for_selected_words()
-    page.click_confirm_delete_button_for_phrases()
+        words_after_delete = self.page.get_words()
+        for word in deleted_words:
+            assert word not in words_after_delete, f"Word '{word}' was not deleted"
 
-    phrases_after_delete = page.get_words()
-    assert deleted_words not in phrases_after_delete, "Не все фразы удалились"
+
+    @allure.story("Check deletion of multiple phrases")
+    def test_select_and_delete_phrases(self):
+        """Verify deletion of multiple selected phrases"""
+        self.page.go_to_phrases_section()
+        phrases_before_delete = self.page.get_phrases()
+        checkboxes = self.page.get_checkboxes()
+        total_checkboxes = len(checkboxes)
+
+        if total_checkboxes == 0:
+            raise ValueError("No available checkboxes to select")
+
+        half_count = total_checkboxes // 2
+        deleted_phrases = phrases_before_delete[:half_count]
+
+        for i in range(half_count):
+            self.page.scroll_and_click(checkboxes[i])
+
+        self.page.scroll_and_click_settings_of_selected_words()
+        self.page.click_delete_button_for_selected_words()
+        self.page.click_confirm_delete_button_for_phrases()
+
+        phrases_after_delete = self.page.get_phrases()
+        for phrase in deleted_phrases:
+            assert phrase not in phrases_after_delete, f"Phrase '{phrase}' was not deleted"
 

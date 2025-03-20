@@ -55,6 +55,10 @@ class SupportLocators():
     MESSAGE_INPUT = (By.XPATH, "//textarea[@name='text']")
     SUCCESSFUL_MESSAGE = (By.XPATH, "//div[@role='dialog']")
     SEND_MESSAGE_BUTTON = (By.XPATH, "//button[@type='submit']")
+    INVALID_NAME_INPUT = (By.XPATH, "//span[text()='The name must be more than 1 and less than 13 symbols.']")
+    INVALID_EMAIL_INPUT = (By.XPATH, "//span[text()='Enter your email in the format yourname@example.com']")
+    EMPTY_MESSAGE_INPUT = (By.XPATH, "//span[text()='Please enter your message']")
+    INVALID_MESSAGE_INPUT = (By.XPATH, "//span[text()='The message cannot contain less than 5 or more than 1000 symbols.']")
 
 
 

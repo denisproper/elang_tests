@@ -32,6 +32,18 @@ class SupportPage(BasePage):
     def check_success_message_is_displayed(self):
         return self.wait.until(EC.visibility_of_element_located(SupportLocators.SUCCESSFUL_MESSAGE))
 
+    def check_invalid_name_message_is_displayed(self):
+        return self.wait.until(EC.visibility_of_element_located(SupportLocators.INVALID_NAME_INPUT))
+
+    def check_invalid_email_message_is_displayed(self):
+        return self.wait.until(EC.visibility_of_element_located(SupportLocators.INVALID_EMAIL_INPUT))
+
+    def check_empty_sentence_message_is_displayed(self):
+        return self.wait.until(EC.visibility_of_element_located(SupportLocators.EMPTY_MESSAGE_INPUT))
+
+    def check_invalid_sentence_message_is_displayed(self):
+        return self.wait.until(EC.visibility_of_element_located(SupportLocators.INVALID_MESSAGE_INPUT))
+
     def click_submit_button(self):
         button = self.wait.until(EC.element_to_be_clickable(SupportLocators.SEND_MESSAGE_BUTTON))
         self.scroll_and_click(button)
