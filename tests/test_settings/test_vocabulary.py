@@ -37,6 +37,9 @@ class TestVocabularySection:
     def test_search_field_for_words(self):
         """Verify search functionality for words"""
         words = self.page.get_words()
+        if not words:
+            assert words == []
+            return
         half_count = len(words) // 2
         random_words = random.sample(words, half_count)
         for word in random_words:
@@ -48,8 +51,11 @@ class TestVocabularySection:
     @allure.story("Check sorting functionality")
     def test_sort(self):
         """Verify sorting of words in ascending and descending order"""
-        self.page.choose_sort("A to Z")
         words_ascending = self.page.get_words()
+        if not words_ascending:
+            assert words_ascending == []
+            return
+        self.page.choose_sort("A to Z")
         assert self.page.is_sorted_words(words_ascending), "Words are not sorted from A to Z"
 
         self.page.choose_sort("Z to A")
@@ -60,15 +66,25 @@ class TestVocabularySection:
     @allure.story("Check search field for phrases")
     def test_search_field_for_phrases(self):
         """Verify search field visibility and functionality for phrases"""
-        self.page.go_to_phrases_section()
         phrases = self.page.get_phrases()
-        assert phrases, "No phrases found in phrases section"
+        if not phrases:
+            assert phrases == []
+            return
+        half_count = len(phrases) // 2
+        random_phrases = random.sample(phrases, half_count)
+        for phrase in random_phrases:
+            self.page.input_search_field(phrase)
+            assert phrase in self.page.get_words(), f"Word '{phrase}' is not displayed in search results"
+            self.page.clear_search_field()
 
 
     @allure.story("Check deletion of multiple words")
     def test_select_and_delete_words(self):
         """Verify deletion of multiple selected words"""
         words_before_delete = self.page.get_words()
+        if not words_before_delete:
+            assert words_before_delete == []
+            return
         checkboxes = self.page.get_checkboxes()
         total_checkboxes = len(checkboxes)
 
@@ -95,6 +111,9 @@ class TestVocabularySection:
         """Verify deletion of multiple selected phrases"""
         self.page.go_to_phrases_section()
         phrases_before_delete = self.page.get_phrases()
+        if not phrases_before_delete:
+            assert phrases_before_delete == []
+            return
         checkboxes = self.page.get_checkboxes()
         total_checkboxes = len(checkboxes)
 

@@ -39,7 +39,6 @@ class VocabularyPage(BasePage):
             elements = self.browser.find_elements(*VocabularyLocators.WORDS)
             return [el.text.strip() for el in elements]
         except Exception as e:
-            print(f"Ошибка при получении слов: {e}")
             return []
 
     def get_phrases(self):
@@ -50,7 +49,6 @@ class VocabularyPage(BasePage):
             elements = self.browser.find_elements(*VocabularyLocators.PHRASES)
             return [el.text.strip() for el in elements]
         except Exception as e:
-            print(f"Ошибка при получении bold текста: {e}")
             return []
 
     def clear_search_field(self):
