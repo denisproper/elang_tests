@@ -1,7 +1,7 @@
 import allure
 import pytest
 from pages.settings.support_page import SupportPage
-from env.authorization.json_read import valid_password, valid_email
+from env.authorization.authorization_data import valid_email, valid_password
 from env.config.json_read import link_for_vocabulary
 from env.support.support_data import SupportData
 

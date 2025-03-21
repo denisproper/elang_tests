@@ -1,7 +1,7 @@
 import time
 import allure
 import pytest
-from env.authorization.json_read import valid_email, valid_password
+from env.authorization.authorization_data import valid_email, valid_password
 from env.config.json_read import link_for_privacy_policy, link_for_settings
 from pages.settings.settings_page import SettingsPage
 

@@ -2,7 +2,7 @@ import random
 import allure
 import pytest
 from pages.settings.vocabulary_page import VocabularyPage
-from env.authorization.json_read import valid_password, valid_email
+from env.authorization.authorization_data import valid_email, valid_password
 from env.config.json_read import link_for_vocabulary
 
 
@@ -101,7 +101,7 @@ class TestVocabularySection:
         if total_checkboxes == 0:
             raise ValueError("No available checkboxes to select")
 
-        half_count = total_checkboxes // 2
+        half_count = 1 if total_checkboxes == 1 else total_checkboxes // 2
         deleted_phrases = phrases_before_delete[:half_count]
 
         for i in range(half_count):

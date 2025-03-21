@@ -16,13 +16,3 @@ partly_right_email = config['partly_right_email']
 empty_password = config['empty_password']
 special_symbols_password = config['special_symbols_password']
 digits_password = config['digits_password']
-
-
-
-load_dotenv()
-
-valid_email = os.getenv("VALID_EMAIL")
-valid_password = os.getenv("VALID_PASSWORD")
-
-if not valid_email or not valid_password:
-    raise ValueError("Переменные окружения VALID_EMAIL и VALID_PASSWORD не заданы!")
