@@ -11,4 +11,4 @@
 
 5. Once the tests have been completed, go to https://denisproper.github.io/elang_tests/ where Allure reports are hosted.
 
-_Note: The test results in Allure may be available for viewing within 10 minutes after the tests have completed._
+Note: The test results in Allure may be available for viewing within 10 minutes after the tests have completed._
