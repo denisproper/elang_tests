@@ -1,6 +1,5 @@
 import os
 import json
-from dotenv import load_dotenv
 
 current_dir = os.path.dirname(__file__)
 config_path = os.path.join(current_dir, 'authorization.json')

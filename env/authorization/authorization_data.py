@@ -1,5 +1,7 @@
 from faker import Faker
 from env.authorization.json_read import *
+from dotenv import load_dotenv
+
 
 fake = Faker()
 
