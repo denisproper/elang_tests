@@ -61,6 +61,3 @@ class SupportLocators():
     INVALID_MESSAGE_INPUT = (By.XPATH, "//span[text()='The message cannot contain less than 5 or more than 1000 symbols.']")
 
 
-
-
-
